@@ -37,15 +37,15 @@ class PopularFragment : Fragment() {
         moviePageListRepository = MoviePageListRepository(apiService)
         popVM = getViewModel()
         val activity = activity as Context
-
+//
         val root = inflater.inflate(R.layout.fragment_popular_movies, container, false)
 
         val movieAdapter = PopularMovieAdapter(activity)
-        val gridLayoutManager = GridLayoutManager(activity, 3)
+        val gridLayoutManager = GridLayoutManager(activity, 1)
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 val viewType = movieAdapter.getItemViewType(position)
-                return if (viewType == movieAdapter.MOVIE_VIEW_TYPE) 1
+                return if (viewType == movieAdapter.movieviewtype) 1
                 else 3
             }
         }
@@ -66,7 +66,7 @@ class PopularFragment : Fragment() {
                 movieAdapter.setNetworkState(it)
             }
         })
-
+//
         @Suppress("DEPRECATION")
         popVM = ViewModelProviders.of(this).get(PopularMoviesActivityViewModel::class.java)
         return root

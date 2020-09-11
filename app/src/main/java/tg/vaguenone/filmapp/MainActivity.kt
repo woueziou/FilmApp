@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+
             val intent = Intent(this, SingleMovie::class.java)
             intent.putExtra("id", 550)
             this.startActivity(intent)
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_popular_movies
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_popular_movies, R.id.nav_search_movies
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

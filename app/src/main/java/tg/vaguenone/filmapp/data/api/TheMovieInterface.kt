@@ -21,6 +21,6 @@ interface TheMovieInterface {
     @GET("movie/popular")
     fun getPopularMovie(@Query("page") page: Int): Single<MovieResponse>
 
-    @GET("search/movie/query/{query}")
-    fun searchMovie(@Query("page") page: Int, @Path("query") query: String): Single<MovieResponse>
+    @GET("search/movie")
+    fun searchMovie(@Query("query") query: String, @Query("page") page: Int): Single<MovieResponse>
 }

@@ -24,7 +24,7 @@ class SearchMovieDataSource(
         callback: LoadInitialCallback<Int, Movie>
     ) {
         networkState.postValue(NetworkState.LOADING)
-        compositeDisposable.add(apiService.searchMovie(page, query).subscribeOn(Schedulers.io())
+        compositeDisposable.add(apiService.searchMovie(query, page).subscribeOn(Schedulers.io())
             .subscribe(
                 {
                     callback.onResult(it.movies, null, page + 1)
@@ -40,7 +40,7 @@ class SearchMovieDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
         networkState.postValue(NetworkState.LOADING)
         compositeDisposable.add(
-            apiService.searchMovie(page, query).subscribeOn(Schedulers.io())
+            apiService.searchMovie(query, page).subscribeOn(Schedulers.io())
                 .subscribe(
                     {
                         if (it.totalPages >= params.key) {

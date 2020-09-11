@@ -9,7 +9,6 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_single_movie.view.*
 import kotlinx.android.synthetic.main.movie_list_item.view.*
 import kotlinx.android.synthetic.main.networ_state_item.view.*
 import tg.vaguenone.filmapp.R
@@ -21,14 +20,14 @@ import tg.vaguenone.filmapp.ui.single_movie_details.SingleMovie
 class PopularMovieAdapter(public val context: Context) :
     PagedListAdapter<Movie, RecyclerView.ViewHolder>(MovieDiffCallBack()) {
 
-    val MOVIE_VIEW_TYPE = 1
-    val NETWORK_VIEW_TYPE = 2
+    val movieviewtype = 1
+    val networkviewtype = 2
     private var networkState: NetworkState? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View
 
-        if (viewType == MOVIE_VIEW_TYPE) {
+        if (viewType == movieviewtype) {
             view = layoutInflater.inflate(R.layout.movie_list_item, parent, false)
             return MovieItemViewHolder(view)
         } else {
@@ -38,7 +37,7 @@ class PopularMovieAdapter(public val context: Context) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (getItemViewType(position) == MOVIE_VIEW_TYPE) {
+        if (getItemViewType(position) == movieviewtype) {
             (holder as MovieItemViewHolder).bind(getItem(position), context)
         } else {
             (holder as NetworkStateItemViewHolder).bind(networkState)
@@ -56,9 +55,9 @@ class PopularMovieAdapter(public val context: Context) :
 
     override fun getItemViewType(position: Int): Int {
         return if (hasExtraRow() && position == itemCount - 1) {
-            NETWORK_VIEW_TYPE
+            networkviewtype
         } else {
-            MOVIE_VIEW_TYPE
+            movieviewtype
         }
     }
 
@@ -78,7 +77,7 @@ class PopularMovieAdapter(public val context: Context) :
             itemView.rc_movie_title.text = movie?.title
             itemView.rc_movie_release_date.text = movie?.releaseDate
             val moviePosterUrl: String = POSTER_BASE_URL + movie?.posterPath
-            Glide.with(itemView.context).load(moviePosterUrl).into(itemView.rc_image_view);
+            Glide.with(itemView.context).load(moviePosterUrl).into(itemView.rc_iv_movie_poster);
 
             itemView.setOnClickListener {
                 val intent = Intent(context, SingleMovie::class.java)

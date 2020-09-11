@@ -27,4 +27,9 @@
         android:name="tg.vaguenone.filmapp.ui.popular_movies.PopularFragment"
         android:label="Popular Movies"
         tools:layout="@layout/fragment_popular_movies" />
+    <fragment
+        android:id="@+id/nav_search_movies"
+        android:name="tg.vaguenone.filmapp.ui.search_movie.SearchFragment"
+        android:label="Rechercher un film"
+        tools:layout="@layout/fragment_search_ui" />
 </navigation>
